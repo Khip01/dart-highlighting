@@ -37,6 +37,7 @@ class HighlightView extends StatelessWidget {
   /// Specify the text selection highlight color
   final Color selectionColor;
 
+
   HighlightView(String input, {
     this.languageId,
     this.theme = const {},
@@ -98,6 +99,9 @@ class HighlightView extends StatelessWidget {
     if (textStyle != null) {
       localTextStyle = localTextStyle.merge(textStyle);
     }
+    final String lang = (languageId?.isEmpty ?? true)
+        ? 'plaintext'
+        : languageId!;
 
     return Container(
       color: theme[_rootKey]?.backgroundColor ?? _defaultBackgroundColor,
@@ -110,7 +114,7 @@ class HighlightView extends StatelessWidget {
           style: textStyle,
           children: _convert(
             highlight
-                .highlight(languageId ?? '', source, true)
+                .highlight(lang, source, true)
                 .nodes ?? [],
           ),
         ),
