@@ -37,9 +37,12 @@ class Highlight {
     bool safeMode = true,
   }) {
     final emitter = Result();
-    final language = _languages[languageId] ?? builtinLanguages[languageId];
 
-    final md = compileLanguage(language!);
+    const defaultLanguageKey = 'plaintext';
+    final Language language = _languages[languageId] ??
+        builtinLanguages[languageId] ?? builtinLanguages[defaultLanguageKey]!;
+
+    final md = compileLanguage(language);
 
     Mode top = continuation ?? md;
     final continuations = Map<String, dynamic>();
